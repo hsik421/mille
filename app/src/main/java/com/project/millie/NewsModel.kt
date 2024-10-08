@@ -7,15 +7,14 @@ import kotlinx.parcelize.Parcelize
 data class News(
     val id: Int,
     val urlToImage: String,
+    val url: String,
     val title: String,
     val publishedAt: String,
 ) : Parcelable
 
-fun tempNews(id: Int) = ApiResult.Success((id until id + 10).map {
-    News(
-        id = it,
-        urlToImage = "",
-        title = "title : $it",
-        publishedAt = "time : $it"
-    )
-}.toList())
+@Parcelize
+data class NewsResponse(
+    val status : String,
+    val totalResults : Int,
+    val articles : List<News>,
+) : Parcelable

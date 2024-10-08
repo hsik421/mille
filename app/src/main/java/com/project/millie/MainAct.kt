@@ -16,14 +16,6 @@ class MainAct : BaseAct<ActMainBinding>(R.layout.act_main) {
     override fun initView() {
         with(dataBinding.newsList) {
             adapter = newsAdapter
-            addOnScrollListener(object: RecyclerView.OnScrollListener(){
-                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                    super.onScrolled(recyclerView, dx, dy)
-                    if(!canScrollVertically(1)) {
-                        newsViewModel.moreLoadItem()
-                    }
-                }
-            })
         }
     }
 

@@ -1,12 +1,13 @@
 package com.project.millie
 
-class NewsRepositoryImpl : NewsRepository{
-    override suspend fun loadItem(id: Int) {
+import javax.inject.Inject
 
+class NewsRepository @Inject constructor(
+    private val remoteDataSource: NewsRemoteDataSource
+) {
+    suspend fun loadItem(): ApiResult<NewsResponse> {
+        return callApi {
+            remoteDataSource.loadItem()
+        }
     }
-}
-
-interface NewsRepository{
-    suspend fun loadItem(id : Int)
-
 }
