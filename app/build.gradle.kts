@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    alias(libs.plugins.ksp)
+    kotlin("kapt")
     alias(libs.plugins.hilt)
     id("kotlin-parcelize")
 }
@@ -52,15 +52,15 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.hilt.android)
-    ksp(libs.hilt.compiler)
+    kapt(libs.hilt.compiler)
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
     implementation(libs.okhttp.logging.interceptor)
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
-    ksp(libs.room.compiler)
+    kapt(libs.room.compiler)
     implementation(libs.glide)
-    ksp(libs.glide.compiler)
+    kapt(libs.glide.compiler)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

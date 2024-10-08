@@ -11,7 +11,6 @@ activity = "1.8.0"
 constraintlayout = "2.1.4"
 lifecycle = "2.8.6"
 hilt = "2.52"
-ksp = "2.0.20-1.0.24"
 retrofit = "2.9.0"
 room = "2.6.1"
 okhttp-logging-interceptor = "4.12.0"
@@ -43,5 +42,4 @@ glide-compiler = { module = "com.github.bumptech.glide:ksp", version.ref = "glid
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }

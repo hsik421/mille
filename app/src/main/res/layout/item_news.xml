@@ -20,8 +20,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scaleType="fitXY"
+                android:minHeight="120dp"
+                android:adjustViewBounds="true"
                 app:layout_constraintTop_toTopOf="parent"
-                android:src="@mipmap/ic_launcher" />
+                app:imgUrlOrDownload="@{item.urlToImage}"
+                app:fileName="@{item.title}"
+                tools:src="@mipmap/ic_launcher" />
 
             <TextView
                 android:id="@+id/news_title"
