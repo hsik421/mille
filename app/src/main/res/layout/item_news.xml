@@ -2,11 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <data>
-        <variable
-            name="item"
-            type="com.project.millie.News" />
-    </data>
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -18,29 +14,35 @@
             <ImageView
                 android:id="@+id/news_thumbnail"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="fitXY"
-                android:minHeight="120dp"
+                android:layout_height="150dp"
                 android:adjustViewBounds="true"
-                app:layout_constraintTop_toTopOf="parent"
+                android:scaleType="fitXY"
+                app:fileName="@{item.publishedAt}"
                 app:imgUrlOrDownload="@{item.urlToImage}"
-                app:fileName="@{item.title}"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:src="@mipmap/ic_launcher" />
 
             <TextView
                 android:id="@+id/news_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/news_thumbnail"
                 android:text="@{item.title}"
+                app:layout_constraintTop_toBottomOf="@id/news_thumbnail"
                 tools:text="title" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/news_title"
                 android:text="@{item.publishedAt}"
+                app:layout_constraintTop_toBottomOf="@id/news_title"
                 tools:text="publishedAt" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.project.millie.News" />
+    </data>
 </layout>

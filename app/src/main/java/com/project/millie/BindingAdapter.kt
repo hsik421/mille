@@ -22,7 +22,7 @@ fun ImageView.setImage(file: File?) {
 @BindingAdapter("imgUrlOrDownload","fileName")
 fun ImageView.setDownloadImage(imgUrl: String?,fileName : String) {
     imgUrl?.let {
-        val file = File(context.filesDir, "${fileName.replace("\\W".toRegex(),"")}.jpg")
+        val file = File(context.filesDir, "${fileName}.jpg")
         if(file.exists()){
             Log.i("hsik","exists")
             this.setImage(file)

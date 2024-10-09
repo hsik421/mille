@@ -31,7 +31,7 @@ class NewsAdapter : ListAdapter<News, NewsAdapter.ViewHolder>(diffUtil) {
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<News>() {
             override fun areItemsTheSame(oldItem: News, newItem: News): Boolean {
-                return oldItem.id == newItem.id
+                return oldItem.publishedAt == newItem.publishedAt
             }
 
 

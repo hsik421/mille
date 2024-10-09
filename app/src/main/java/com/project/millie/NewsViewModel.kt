@@ -15,21 +15,21 @@ class NewsViewModel @Inject constructor(private val newsRepository: NewsReposito
     val newsItems get() = _newItems
 
     init {
-        viewModelScope.launch {
-            loadItem()
-        }
+        loadItem()
     }
 
-    private suspend fun loadItem() {
-        Log.i("hsik","loadItem")
-        when (val result = newsRepository.loadItem()) {
-            is ApiResult.Success -> {
-                _newItems.value = result.data.articles
-            }
-            else -> {
-
+    private fun loadItem() {
+        viewModelScope.launch {
+            when(val result = newsRepository.loadItems()){
+                is ApiResult.Success->{
+                    _newItems.value = result.data
+                }
+                is ApiResult.Failure->{
+                    _newItems.value = result.data
+                }
             }
         }
+
     }
 
 //    fun moreLoadItem() {

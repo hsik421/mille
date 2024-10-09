@@ -1,16 +1,25 @@
 package com.project.millie
 
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
+import org.jetbrains.annotations.NotNull
 
 @Parcelize
+@Entity(tableName = "news")
 data class News(
-    val id: Int,
-    val urlToImage: String,
+    @PrimaryKey
+    val publishedAt: String,
+    val urlToImage: String?,
     val url: String,
     val title: String,
-    val publishedAt: String,
-) : Parcelable
+    var isVisited : Int = 0
+) : Parcelable{
+    @IgnoredOnParcel
+    val fileName  get() =  title.replace("\\W".toRegex(),"")
+}
 
 @Parcelize
 data class NewsResponse(
