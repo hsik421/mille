@@ -1,9 +1,12 @@
-package com.project.millie
+package com.project.millie.ui.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.project.millie.data.repository.NewsRepository
+import com.project.millie.utils.SingleLiveEvent
+import com.project.millie.utils.ApiResult
+import com.project.millie.data.model.News
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -14,24 +17,40 @@ class NewsViewModel @Inject constructor(private val newsRepository: NewsReposito
     private val _newItems = MutableLiveData<List<News>>(listOf())
     val newsItems get() = _newItems
 
+    val startWebViewEvent = SingleLiveEvent<String>()
+    val showProgress = SingleLiveEvent<Boolean>()
+    val showAlertEvent = SingleLiveEvent<String>()
     init {
         loadItem()
     }
 
     private fun loadItem() {
         viewModelScope.launch {
+            showProgress.value = true
             when(val result = newsRepository.loadItems()){
                 is ApiResult.Success->{
                     _newItems.value = result.data
+                    showAlertEvent.value = "Load Success"
                 }
                 is ApiResult.Failure->{
                     _newItems.value = result.data
+                    showAlertEvent.value = result.exception.message
                 }
             }
+            showProgress.value = false
         }
 
     }
 
+    fun startWebView(item : News){
+        if(item.url == "https://removed.com") return
+        viewModelScope.launch {
+            item.isVisited = 1
+            newsRepository.insertItems(listOf(item))
+            startWebViewEvent.value = item.url
+        }
+
+    }
 //    fun moreLoadItem() {
 //        viewModelScope.launch {
 //            val nextPage = newsItems.value?.size?:0

@@ -1,5 +1,7 @@
-package com.project.millie
+package com.project.millie.data.datasource
 
+import com.project.millie.data.NewsDao
+import com.project.millie.data.model.News
 import javax.inject.Inject
 
 class NewsLocalDataSource @Inject constructor(private val newsDao : NewsDao){

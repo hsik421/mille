@@ -1,5 +1,7 @@
-package com.project.millie
+package com.project.millie.di
 
+import com.project.millie.data.ApiService
+import com.project.millie.data.RemoteConstants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -8,7 +10,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import javax.inject.Singleton
 
 @Module
@@ -43,7 +44,7 @@ class NetworkModule {
         okHttpClient: OkHttpClient,
         gsonConverterFactory: GsonConverterFactory
     ): Retrofit = Retrofit.Builder()
-        .baseUrl(BASE_URL)
+        .baseUrl(RemoteConstants.BASE_URL)
         .client(okHttpClient)
         .addConverterFactory(gsonConverterFactory)
         .build()
@@ -55,9 +56,4 @@ class NetworkModule {
     ): ApiService {
         return retrofit.create(ApiService::class.java)
     }
-
-    companion object {
-        private const val BASE_URL = "https://newsapi.org/"
-    }
-
 }

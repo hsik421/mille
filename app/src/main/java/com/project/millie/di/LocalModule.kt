@@ -1,7 +1,10 @@
-package com.project.millie
+package com.project.millie.di
 
 import android.content.Context
 import androidx.room.Room
+import com.project.millie.data.AppDatabase
+import com.project.millie.data.LocalConstants
+import com.project.millie.data.NewsDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,13 +18,9 @@ class LocalModule {
     @Provides
     @Singleton
     fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase =
-        Room.databaseBuilder(context, AppDatabase::class.java, MY_DATABASE).build()
+        Room.databaseBuilder(context, AppDatabase::class.java, LocalConstants.MY_DATABASE).build()
 
     @Singleton
     @Provides
     fun provideNewsDao(appDatabase: AppDatabase): NewsDao = appDatabase.newsDao()
-
-    companion object{
-        private const val MY_DATABASE = "hsik.db"
-    }
 }

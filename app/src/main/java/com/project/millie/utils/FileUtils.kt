@@ -1,4 +1,4 @@
-package com.project.millie
+package com.project.millie.utils
 
 import java.io.InputStream
 import java.io.OutputStream

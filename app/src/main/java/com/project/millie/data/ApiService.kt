@@ -1,5 +1,6 @@
-package com.project.millie
+package com.project.millie.data
 
+import com.project.millie.data.model.NewsResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 

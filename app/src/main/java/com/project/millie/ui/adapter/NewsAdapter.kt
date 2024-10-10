@@ -1,16 +1,31 @@
-package com.project.millie
+package com.project.millie.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.project.millie.data.model.News
+import com.project.millie.ui.viewmodel.NewsViewModel
+import com.project.millie.R
 import com.project.millie.databinding.ItemNewsBinding
 
-class NewsAdapter : ListAdapter<News, NewsAdapter.ViewHolder>(diffUtil) {
+class NewsAdapter(private val viewModel: NewsViewModel) : ListAdapter<News, NewsAdapter.ViewHolder>(
+    diffUtil
+) {
     inner class ViewHolder(private var binding: ItemNewsBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: News) {
             binding.item = item
+            binding.root.setOnClickListener {
+//                item.isVisited = 1
+//                notifyItemChanged(position)
+                if(item.isVisited == 0){
+                    binding.newsTitle.setTextColor(ContextCompat.getColor(it.context, R.color.red))
+                    binding.newsTime.setTextColor(ContextCompat.getColor(it.context, R.color.red))
+                }
+                viewModel.startWebView(item)
+            }
         }
     }
 

@@ -1,5 +1,10 @@
-package com.project.millie
+package com.project.millie.data.repository
 
+import com.project.millie.data.datasource.NewsLocalDataSource
+import com.project.millie.data.datasource.NewsRemoteDataSource
+import com.project.millie.data.RemoteConstants
+import com.project.millie.utils.ApiResult
+import com.project.millie.data.model.News
 import javax.inject.Inject
 
 class NewsRepository @Inject constructor(
@@ -8,10 +13,10 @@ class NewsRepository @Inject constructor(
 ) {
     suspend fun loadItems(): ApiResult<List<News>> {
         return try {
-            if (remoteDataSource.loadItems().status == "ok") {
+            if (remoteDataSource.loadItems().status == RemoteConstants.SUCCESS_CODE) {
                 remoteDataSource.loadItems().articles.let {
-                    insertItems(it)
                     getVisitedItems(it)
+                    insertItems(it)
                     ApiResult.Success(it)
                 }
             } else {

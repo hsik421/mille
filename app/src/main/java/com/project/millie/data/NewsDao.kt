@@ -1,18 +1,20 @@
-package com.project.millie
+package com.project.millie.data
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.project.millie.data.LocalConstants
+import com.project.millie.data.model.News
 
 @Dao
 interface NewsDao {
-    @Query("SELECT * FROM news")
+    @Query("SELECT * FROM ${LocalConstants.NEWS_TABLE_NAME}")
     suspend fun loadItems() : List<News>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertItems(items: List<News>)
 
-    @Query("SELECT * FROM news WHERE publishedAt IN (:items) and isVisited = 1")
+    @Query("SELECT * FROM ${LocalConstants.NEWS_TABLE_NAME} WHERE publishedAt IN (:items) and isVisited = 1")
     suspend fun getVisitedItems(items : List<String>) : List<News>
 }

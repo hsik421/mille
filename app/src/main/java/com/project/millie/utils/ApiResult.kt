@@ -1,4 +1,4 @@
-package com.project.millie
+package com.project.millie.utils
 
 sealed class ApiResult<out T> {
     data class Success<out T>(val data: T) : ApiResult<T>()

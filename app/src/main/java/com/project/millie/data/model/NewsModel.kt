@@ -1,14 +1,13 @@
-package com.project.millie
+package com.project.millie.data.model
 
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import kotlinx.parcelize.IgnoredOnParcel
+import com.project.millie.data.LocalConstants
 import kotlinx.parcelize.Parcelize
-import org.jetbrains.annotations.NotNull
 
 @Parcelize
-@Entity(tableName = "news")
+@Entity(tableName = LocalConstants.NEWS_TABLE_NAME)
 data class News(
     @PrimaryKey
     val publishedAt: String,
@@ -16,10 +15,7 @@ data class News(
     val url: String,
     val title: String,
     var isVisited : Int = 0
-) : Parcelable{
-    @IgnoredOnParcel
-    val fileName  get() =  title.replace("\\W".toRegex(),"")
-}
+) : Parcelable
 
 @Parcelize
 data class NewsResponse(
